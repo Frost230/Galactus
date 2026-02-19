@@ -17,7 +17,6 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 open_tickets = {}
 
 
-# ── MODAL DE AVALIAÇÃO ──────────────────────────────────────────────
 class ReviewModal(Modal, title='📝 Avaliação do Atendimento'):
     reason = TextInput(
         label='Conte como foi seu atendimento',
@@ -65,7 +64,6 @@ class ReviewModal(Modal, title='📝 Avaliação do Atendimento'):
         )
 
 
-# ── SELECT DE ESTRELAS ──────────────────────────────────────────────
 class StarSelect(Select):
     def __init__(self, channel_id, staff_id):
         self.channel_id = channel_id
@@ -92,7 +90,6 @@ class StarView(View):
         self.add_item(StarSelect(channel_id, staff_id))
 
 
-# ── BOTÕES DO TICKET ────────────────────────────────────────────────
 class TicketButtons(View):
     def __init__(self):
         super().__init__(timeout=None)
@@ -182,7 +179,6 @@ class TicketButtons(View):
         await interaction.channel.delete()
 
 
-# ── DROPDOWN DO PAINEL ──────────────────────────────────────────────
 class TicketSelect(Select):
     def __init__(self):
         options = [
@@ -285,7 +281,6 @@ class TicketView(View):
         self.add_item(TicketSelect())
 
 
-# ── ON READY ────────────────────────────────────────────────────────
 @bot.event
 async def on_ready():
     bot.add_view(TicketButtons())
@@ -323,6 +318,7 @@ async def on_ready():
         print(f'✅ Painel enviado no canal #{channel.name}')
     else:
         print('❌ Canal do painel não encontrado!')
+
 
 
 bot.run(TOKEN)
